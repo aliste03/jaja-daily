@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Receipt, Wallet, ShoppingCart, CheckSquare, BarChart2, Bell } from 'lucide-react'
+import { LayoutDashboard, Receipt, Wallet, ShoppingCart, CheckSquare, BarChart2, Bell, Globe } from 'lucide-react'
 import Dashboard from './pages/Dashboard'
 import Gastos from './pages/Gastos'
 import Presupuesto from './pages/Presupuesto'
@@ -7,6 +7,7 @@ import Tienda from './pages/Tienda'
 import Tareas from './pages/Tareas'
 import Estadisticas from './pages/Estadisticas'
 import Notificaciones from './pages/Notificaciones'
+import WebTienda from './pages/WebTienda'
 
 const NAV = [
   { path: '/',               label: 'Inicio',  Icon: LayoutDashboard },
@@ -16,6 +17,7 @@ const NAV = [
   { path: '/tareas',         label: 'Tareas',  Icon: CheckSquare     },
   { path: '/estadisticas',   label: 'Stats',   Icon: BarChart2       },
   { path: '/notificaciones', label: 'Avisos',  Icon: Bell            },
+  { path: '/web',            label: 'Arbela',  Icon: Globe           },
 ]
 
 export default function App() {
@@ -33,6 +35,7 @@ export default function App() {
           <Route path="/tareas"         element={<Tareas />} />
           <Route path="/estadisticas"   element={<Estadisticas />} />
           <Route path="/notificaciones" element={<Notificaciones />} />
+          <Route path="/web"            element={<WebTienda />} />
         </Routes>
       </main>
 
@@ -48,8 +51,8 @@ export default function App() {
                   active ? 'text-indigo-400' : 'text-slate-500 active:text-slate-300'
                 }`}
               >
-                <Icon size={22} strokeWidth={active ? 2.5 : 1.8} />
-                <span className={`text-[10px] font-medium ${active ? 'opacity-100' : 'opacity-50'}`}>
+                <Icon size={20} strokeWidth={active ? 2.5 : 1.8} />
+                <span className={`text-[9px] font-medium ${active ? 'opacity-100' : 'opacity-50'}`}>
                   {label}
                 </span>
               </button>
