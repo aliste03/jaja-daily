@@ -1,102 +1,60 @@
-import { ExternalLink, Globe, ShoppingBag, MapPin, Camera } from 'lucide-react'
+import { useState } from 'react'
+import { RefreshCw, ExternalLink, Globe } from 'lucide-react'
 
-const URL_WEB       = 'https://arbeladonosti.com'
-const URL_INSTAGRAM = 'https://www.instagram.com/arbeladonosti'
+const URL = 'https://arbeladonosti.com'
 
 export default function WebTienda() {
+  const [key, setKey] = useState(0)
+  const [cargando, setCargando] = useState(true)
+
+  function recargar() {
+    setKey(k => k + 1)
+    setCargando(true)
+  }
+
   return (
-    <div className="h-full scrollable no-scrollbar bg-[#0f0f1a]">
-      <div className="px-4 pt-14 pb-8 flex flex-col gap-5">
-
-        {/* Header */}
-        <div>
-          <p className="text-slate-400 text-sm">Acceso rápido</p>
-          <h1 className="text-2xl font-bold text-white">Arbela Donosti</h1>
+    <div className="h-full flex flex-col bg-[#0f0f1a]">
+      {/* Header */}
+      <div className="shrink-0 px-4 pt-14 pb-3 flex items-center gap-3 border-b border-white/10">
+        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
+          <Globe size={18} className="text-indigo-400" />
         </div>
-
-        {/* Tarjeta principal */}
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-violet-700 to-indigo-800 p-6">
-          <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/5" />
-          <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-white/5" />
-          <ShoppingBag size={36} className="text-white/80 mb-3" />
-          <p className="text-white font-bold text-xl">arbeladonosti.com</p>
-          <p className="text-violet-200 text-sm mt-1">Tu tienda online</p>
-          <a
-            href={URL_WEB}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex items-center justify-center gap-2 bg-white text-violet-800 font-bold py-3.5 rounded-xl active:scale-[0.97] transition-transform"
-          >
-            <ExternalLink size={18} />
-            Abrir web
-          </a>
+        <div className="flex-1 min-w-0">
+          <p className="text-white font-semibold text-sm leading-tight">Arbela Donosti</p>
+          <p className="text-slate-500 text-xs truncate">arbeladonosti.com</p>
         </div>
+        <button
+          onClick={recargar}
+          className="text-slate-400 p-2 rounded-xl bg-white/5 active:bg-white/10"
+        >
+          <RefreshCw size={16} className={cargando ? 'animate-spin' : ''} />
+        </button>
+        <a
+          href={URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-400 p-2 rounded-xl bg-white/5 active:bg-white/10"
+        >
+          <ExternalLink size={16} />
+        </a>
+      </div>
 
-        {/* Accesos directos */}
-        <div>
-          <p className="text-slate-400 text-sm mb-3">Accesos directos</p>
-          <div className="space-y-2">
-
-            <a
-              href={URL_WEB}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass rounded-xl px-4 py-4 flex items-center gap-4 active:scale-[0.98] transition-transform"
-            >
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center shrink-0">
-                <Globe size={20} className="text-indigo-400" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-medium">Web principal</p>
-                <p className="text-slate-500 text-xs">arbeladonosti.com</p>
-              </div>
-              <ExternalLink size={16} className="text-slate-600" />
-            </a>
-
-            <a
-              href={`${URL_WEB}/tienda`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass rounded-xl px-4 py-4 flex items-center gap-4 active:scale-[0.98] transition-transform"
-            >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center shrink-0">
-                <ShoppingBag size={20} className="text-emerald-400" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-medium">Tienda online</p>
-                <p className="text-slate-500 text-xs">Catálogo de productos</p>
-              </div>
-              <ExternalLink size={16} className="text-slate-600" />
-            </a>
-
-            <a
-              href={URL_INSTAGRAM}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass rounded-xl px-4 py-4 flex items-center gap-4 active:scale-[0.98] transition-transform"
-            >
-              <div className="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center shrink-0">
-                <Camera size={20} className="text-pink-400" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-medium">Instagram</p>
-                <p className="text-slate-500 text-xs">@arbeladonosti</p>
-              </div>
-              <ExternalLink size={16} className="text-slate-600" />
-            </a>
-
+      {/* Iframe */}
+      <div className="flex-1 relative overflow-hidden">
+        {cargando && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10 bg-[#0f0f1a]">
+            <div className="w-10 h-10 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
+            <p className="text-slate-400 text-sm">Cargando Arbela Donosti...</p>
           </div>
-        </div>
-
-        {/* Info */}
-        <div className="glass rounded-2xl p-4 space-y-3">
-          <p className="text-white font-semibold">Información</p>
-          <div className="flex items-start gap-3">
-            <MapPin size={16} className="text-slate-400 mt-0.5 shrink-0" />
-            <p className="text-slate-300 text-sm">San Sebastián, Donostia</p>
-          </div>
-        </div>
-
+        )}
+        <iframe
+          key={key}
+          src={URL}
+          className="w-full h-full border-0"
+          onLoad={() => setCargando(false)}
+          title="Arbela Donosti"
+          allow="fullscreen"
+        />
       </div>
     </div>
   )
